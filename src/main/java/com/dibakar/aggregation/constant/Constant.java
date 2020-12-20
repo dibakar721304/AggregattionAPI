@@ -10,6 +10,8 @@ public class Constant {
 	public static final String SHIPMENTS="shipments";
 	public static final String TRACKING="track";
 	public static final String PRICING="pricing";
+	public static final String AGGREGATION="aggregation";
+
 
 
 
