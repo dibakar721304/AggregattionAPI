@@ -11,11 +11,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(as = TNTaggregation.class)
 public class TNTaggregation {
 
-	@JsonProperty("")
+	@JsonProperty
 	private Map<String, List<String>> shipments;
-	@JsonProperty("")
+	@JsonProperty
 	private Map<String, Float> pricing;
-	@JsonProperty("")
+	@JsonProperty
 	private Map<String, String> tracking;
 
 	public Map<String, List<String>> getShipments() {

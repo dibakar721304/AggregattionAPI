@@ -1,5 +1,7 @@
 package com.dibakar.aggregation.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +17,15 @@ public class APIConfig {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CONFIG_SEQ")
-	@Column(name = "api_config_id")
+	@Column(name = "api_config_id") 
 	private int api_config_id;
+
+	@Override
+	public String toString() {
+		return "APIConfig [api_config_id=" + api_config_id + ", api_name=" + api_name + ", request_count="
+				+ request_count + ", query_param=" + query_param + ", first_request_timestamp="
+				+ first_request_timestamp + "]";
+	}
 
 	@Column(name = "api_name")
 	private String api_name;
@@ -28,11 +37,14 @@ public class APIConfig {
 	@Column(name = "query_param")
 	private String query_param;
 	
+	@Column(name = "first_request_timestamp")
+	private LocalDateTime first_request_timestamp;
+	
 	public int getApi_config_id() {
 		return api_config_id;
 	}
 
-	public void setApi_config_id(int api_config_id) {
+	public void setApi_config_id(int api_config_id) { 
 		this.api_config_id = api_config_id;
 	}
 
@@ -59,6 +71,14 @@ public class APIConfig {
 
 	public void setRequest_count(int request_count) {
 		this.request_count = request_count;
+	}
+
+	public LocalDateTime getFirst_request_timestamp() {
+		return first_request_timestamp;
+	}
+
+	public void setFirst_request_timestamp(LocalDateTime first_request_timestamp) {
+		this.first_request_timestamp = first_request_timestamp;
 	}
 
 

@@ -11,6 +11,11 @@ public class Constant {
 	public static final String TRACKING="track";
 	public static final String PRICING="pricing";
 	public static final String AGGREGATION="aggregation";
+	public static final String ACTIVEMQ_BROKER_URL = "tcp://localhost:61616";
+	public static final String SHIPMENTS_QUEUE = "shipmentsAPI.queue";
+	public static final String PRICING_QUEUE = "pricingAPI.queue";
+	public static final String TRACKING_QUEUE = "trackingAPI.queue";
+
 
 
 

@@ -7,7 +7,11 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import static java.util.Collections.*;
-
+/**
+ * Helper class to convert List of strings to strings 
+ * @author Dibakar
+ *
+ */
 @Converter
 public class StringListConverter implements AttributeConverter<List<String>, String> {
     private static final String SPLIT_CHAR = ", ";
