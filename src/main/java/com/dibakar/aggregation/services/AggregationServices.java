@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dibakar.aggregation.constant.Constant;
+import com.dibakar.aggregation.exception.MissingQueryParameterException;
 import com.dibakar.aggregation.exception.ResourceNotFoundException;
 import com.dibakar.aggregation.model.APIConfig;
 import com.dibakar.aggregation.model.Pricing;
@@ -111,7 +112,10 @@ public class AggregationServices {
 		logger.debug("getShipmentResponse() started");
 		APIConfig apiConfig = null;
 		Map<String, List<String>> deserializeResponse = null;
-
+		if (StringUtils.isEmpty(queryParam)) {
+			throw new MissingQueryParameterException(
+					"The shipment API request is invalid" + queryParam);
+		}
 		try {
 			jmsTemplateShipments.convertAndSend(jmsTemplateShipments.getDefaultDestinationName(), queryParam);
 
@@ -177,7 +181,10 @@ public class AggregationServices {
 
 		APIConfig apiConfig = null;
 		Map<String, String> deserializeResponse = null;
-
+		if (StringUtils.isEmpty(queryParam)) {
+			throw new MissingQueryParameterException(
+					"The tracking API request is missing query params" + queryParam);
+		}
 		try {
 			jmsTemplateTracking.convertAndSend(jmsTemplateTracking.getDefaultDestinationName(), queryParam);
 
@@ -207,10 +214,12 @@ public class AggregationServices {
 
 		return deserializeResponse;
 	}
-/**
- * Method to save the Tracking response object into DB
- * @param deserializeResponse
- */
+
+	/**
+	 * Method to save the Tracking response object into DB
+	 * 
+	 * @param deserializeResponse
+	 */
 	private void saveTrackingDetails(Map<String, String> deserializeResponse) {
 		logger.debug("saveTrackingDetails() started");
 
@@ -221,7 +230,7 @@ public class AggregationServices {
 			tracking.setOrder_status(v);
 			trackingList.add(tracking);
 		});
-		logger.debug("List of Tracking objects "+trackingList);
+		logger.debug("List of Tracking objects " + trackingList);
 
 		trackingRepository.saveAll(trackingList);
 		logger.debug("saveTrackingDetails() ended");
@@ -239,7 +248,7 @@ public class AggregationServices {
 
 		String url = Constant.HOSTNAME + Constant.THIRD_PARTY_PORT + Constant.FORWARD_SLASH + apiPath
 				+ Constant.QUESTION_STRING + Constant.QUERY_PARAM_STRING + Constant.EQUALS_STRING + queryParams;
-		
+
 		logger.debug("getResponseAsString() ended");
 
 		return restTemplateBuilder.build().exchange(url, HttpMethod.GET, null, String.class);
@@ -260,7 +269,10 @@ public class AggregationServices {
 
 		APIConfig apiConfig = null;
 		Map<String, Float> deserializeResponse = null;
-
+		if (StringUtils.isEmpty(queryParam)) {
+			throw new MissingQueryParameterException(
+					"The pricing API request is invalid" + queryParam);
+		}
 		try {
 			jmsTemplatePricing.convertAndSend(jmsTemplatePricing.getDefaultDestinationName(), queryParam);
 
@@ -289,10 +301,12 @@ public class AggregationServices {
 
 		return deserializeResponse;
 	}
-/**
- * Method to update the request count( completing the cap) and query param
- * @param id
- */
+
+	/**
+	 * Method to update the request count( completing the cap) and query param
+	 * 
+	 * @param id
+	 */
 	private void updateRequestCountAndQueryParam(Integer id) {
 		logger.debug("updateRequestCountAndQueryParam() started");
 
@@ -305,10 +319,12 @@ public class AggregationServices {
 		logger.debug("updateRequestCountAndQueryParam() ended");
 
 	}
-/**
- * Method to save pricing response objects to DB
- * @param deserializeResponse
- */
+
+	/**
+	 * Method to save pricing response objects to DB
+	 * 
+	 * @param deserializeResponse
+	 */
 	private void savePricingDetails(Map<String, Float> deserializeResponse) {
 		logger.debug("savePricingDetails() started");
 

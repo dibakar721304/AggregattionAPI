@@ -36,7 +36,7 @@ public class AggregationApplication {
  * @return
  */
 	@Bean
-	public CommandLineRunner init(APIConfigRepository apiConfigRepository) {
+	public CommandLineRunner init(APIConfigRepository apiConfigRepository ) {
 		logger.debug("Initial data load through commandLineRunner");
 
 		return args -> {

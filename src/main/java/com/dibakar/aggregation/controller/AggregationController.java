@@ -64,7 +64,7 @@ public class AggregationController {
 		logger.debug("Query params for Shipments API" + queryParam);
 
 		Map<String, List<String>> shipmentResponse = aggregationServices.getShipmentResponse(queryParam);
-		if (null == shipmentResponse) {
+		if (null == shipmentResponse || shipmentResponse.isEmpty()) {
 			logger.error("shipment details for  :" + queryParam + " Not Found!");
 			throw new com.dibakar.aggregation.exception.ResourceNotFoundException(
 					"shipment details for  :" + queryParam + " Not Found!");
@@ -80,7 +80,7 @@ public class AggregationController {
 		logger.debug("Query params for Tracking API" + queryParam);
 
 		Map<String, String> trackingResponse = aggregationServices.getTrackingResponse(queryParam);
-		if (null == trackingResponse) {
+		if (null == trackingResponse || trackingResponse.isEmpty()) {
 			logger.error("tracking details for  :" + queryParam + " Not Found!");
 			throw new com.dibakar.aggregation.exception.ResourceNotFoundException(
 					"tracking details for  :" + queryParam + " Not Found!");
@@ -96,7 +96,7 @@ public class AggregationController {
 		logger.debug("Query params for Tracking API" + queryParam);
 
 		Map<String, Float> pricingResponse = aggregationServices.getPricingResponse(queryParam);
-		if (null == pricingResponse) {
+		if (null == pricingResponse || pricingResponse.isEmpty()) {
 			logger.error("pricing details for  :" + queryParam + " Not Found!");
 			throw new com.dibakar.aggregation.exception.ResourceNotFoundException(
 					"pricing details for  :" + queryParam + " Not Found!");
