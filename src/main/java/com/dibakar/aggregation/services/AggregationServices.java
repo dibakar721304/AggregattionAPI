@@ -348,7 +348,7 @@ public class AggregationServices {
 	 * @param queryParam
 	 * @return
 	 */
-	private void updatedResponseBuilder() {
+	public void updatedResponseBuilder() {
 		logger.debug("updatedResponseBuilder() started");
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
 		StringHttpMessageConverter converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);

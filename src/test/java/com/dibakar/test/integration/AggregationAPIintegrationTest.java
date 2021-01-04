@@ -7,10 +7,26 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.dibakar.aggregation.AggregationApplication;
+import com.dibakar.aggregation.controller.AggregationController;
+
 @RunWith(SpringRunner.class)
+@SpringBootTest(classes= AggregationApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AggregationAPIintegrationTest {
+	@Autowired
+	private AggregationController aggregationController;
+	 @Test
+	    public void contextLoads() {
+	        Assertions
+	          .assertThat(aggregationController)
+	          .isNotNull();
+
+	    }
+
 	@Test
 	public void testForAggregationAPI() throws Exception {
 		HttpUriRequest request = new HttpGet("http://localhost:8081/aggregation?pricing=FR&track=109347263&shipments=109347263");
